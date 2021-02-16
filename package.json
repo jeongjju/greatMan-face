@@ -1,7 +1,6 @@
 {
-  "name": "resemblecar",
+  "name": "greatman-face",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +8,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^0.12.3"
-  }
+    "http-server": "^0.12.3",
+    "jquery.facedetection": "^2.0.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeongjju/greatMan-face.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeongjju/greatMan-face/issues"
+  },
+  "homepage": "https://github.com/jeongjju/greatMan-face#readme",
+  "description": ""
 }

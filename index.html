@@ -12,14 +12,14 @@
     <meta name="title" content="위인 닮은꼴 테스트">
     <meta name="subject" content="얼굴로 보는 인공지능 위인 닮을꼴 테스트, 나와 닮은 위인을 찾아보세요!">
     <meta name="keywords" content="위인, 인공지능 테스트, 얼굴상, 위인상 테스트, 위인 닮은꼴 테스트, AI 얼굴상">
-    <meta name="author" content="조코딩">
+    <!-- <meta name="author" content="조코딩"> -->
     <link rel="stylesheet" href="style.css">
     <link rel="canonical" href="https://animalface.site" />
     <meta property="og:url" content="https://animalface.site" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="위인닮은꼴 테스트" />
-    <meta property="og:image"
-        content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fc0eq42%2FbtqCQpiFhFn%2F8KPaOP9q8PXpJFRL7if55K%2Fimg.jpg" />
+    <!-- <meta property="og:image"
+        content="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fc0eq42%2FbtqCQpiFhFn%2F8KPaOP9q8PXpJFRL7if55K%2Fimg.jpg" /> -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e64b3727e862b06"></script>
@@ -39,10 +39,10 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item active">
+                <!-- <li class="nav-item active">
                     <a class="nav-link" id="yotube-top-link"
                         href="https://www.youtube.com/channel/UCQNE2JmbasNYbjGAcuBiRRg">조코딩 유튜브 채널</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>
@@ -79,7 +79,11 @@
             </div>
         </div>
         <div class="file-upload-content">
-            <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+
+            <!-- <img id="picture" src="img/face.jpeg"> -->
+            <div class="picture-containers">
+                <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+            </div>
             <div id="loading" class="animated bounce">
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
@@ -95,12 +99,26 @@
                     <span class="try-again-text">다른 사진으로 재시도</span>
                 </button>
             </div>
+
+            <div class="pt-3 image-title-wrap" id="test">
+                <button type="button p-2" class="try-again-btn" onclick="button_tryit_click();">
+                    <span class="try-again-text">try it</span>
+                </button>
+            </div>
         </div>
     </div>
     <footer class="footer pt-5 container d-flex justify-content-center">
         <div>
-            <p>&copy; 조코딩 JoCoding 2020. All Rights Reserved. </p>
+            <div>
+                Pictures and data are not stored on the server
+            </div>
+            <div>
+                사진은 서버에 저장되지 않으니 안심하고 이용하세요
+            </div>
         </div>
+        <!-- <div>
+            <p>&copy; 조코딩 JoCodi. All Rights Reserved. </p>
+        </div> -->
     </footer>
     <script>
         function readURL(input) {
@@ -115,7 +133,11 @@
                 };
                 reader.readAsDataURL(input.files[0]);
                 init().then(function () {
+
                     predict();
+
+
+
                     $('#loading').hide();
                 });
             } else {
@@ -137,6 +159,8 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="path/to/dist/jquery.facedetection.min.js"></script>
     <script type="text/javascript">
         const URL = "https://teachablemachine.withgoogle.com/models/IOBnV9dqB/";
 
@@ -156,6 +180,10 @@
             }
         }
         async function predict() {
+
+
+
+
             var image = document.getElementById("face-image")
             const prediction = await model.predict(image, false);
             prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
@@ -228,7 +256,7 @@
             //             resultCeleb = ""
             //     }
             // }
-            console.log('resultTitle',resultTitle);
+            console.log('resultTitle', resultTitle);
             var title = "<div class='" + prediction[0].className + "-animal-title'>" + prediction[0].className + "</div>"
             // var explain = "<div class='animal-explain pt-2'>" + resultExplain + "</div>"
             // var celeb = "<div class='" + prediction[0].className + "-animal-celeb pt-2 pb-2'>" + resultCeleb + "</div>"
@@ -270,14 +298,45 @@
                 // }
                 var label = "<div class='animal-label d-flex align-items-center'>" + prediction[i].className + "</div>"
                 var bar = "<div class='bar-container position-relative container'><div class='percent-box'></div><div class='d-flex justify-content-center align-items-center percent-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></div>"
-            //    console.log('bar',bar);
+                //    console.log('bar',bar);
                 // var bar = "<div class='bar-container position-relative container'><div class='" + prediction[i].className + "-box'></div><div class='d-flex justify-content-center align-items-center " + prediction[i].className + "-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></div>"
-               
+
                 labelContainer.childNodes[i].innerHTML = label + bar;
             }
         }
     </script>
     <script>
+
+        function button_tryit_click() {
+            // $('.face').remove();
+            $('#face-image').faceDetection({
+                complete: function (faces) {
+                    console.log('complete~~~~');
+                    // $('#test').append("<div style='position:absolute;left:10px;top:10px;width:10px;height:10px;'>test</div>")
+                    $('.picture-containers').append("<div style='left:10px;top:10px;width:50px;height:50px;position:absolute;z-index:3;color:red'>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</div>")
+
+                    // for (var i = 0; i < faces.length; i++) {
+                    //     console.log('faces', faces);
+                    //     $('<div>', {
+                    //         'class': 'face',
+                    //         'css': {
+                    //             'position': 'absolute',
+                    //             'left': faces[i].x * faces[i].scaleX + 'px',
+                    //             'top': faces[i].y * faces[i].scaleY + 'px',
+                    //             'width': faces[i].width * faces[i].scaleX + 'px',
+                    //             'height': faces[i].height * faces[i].scaleY + 'px'
+                    //         }
+                    //     })
+                    //     .insertAfter(this);
+                    // }
+
+                },
+                error: function (code, message) {
+                    alert('Error: ' + message);
+                }
+            });
+        }
+
         function iosApp() {
             document.getElementById("coupang").style.display = "none";
             $("#coupang ins").hide();
