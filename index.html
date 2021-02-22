@@ -92,7 +92,7 @@
             </div>
             <p class="result-message"></p>
             <div id="label-container" class="d-flex flex-column justify-content-around"></div>
-            <div id="addThis" class="addthis_inline_share_toolbox_6lz1"></div>
+            <div id="addThis" class="addthis_inline_share_toolbox_6lz1 share"></div>
 
             <div class="pt-3 image-title-wrap">
                 <button type="button p-2" class="try-again-btn" onclick="window.location.reload();">
@@ -102,7 +102,7 @@
 
             <div class="pt-3 image-title-wrap" id="test">
                 <button type="button p-2" class="try-again-btn" onclick="button_tryit_click();">
-                    <span class="try-again-text">try it</span>
+                    <!-- <span class="try-again-text">try it</span> -->
                 </button>
             </div>
         </div>
@@ -162,7 +162,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="path/to/dist/jquery.facedetection.min.js"></script>
     <script type="text/javascript">
-        const URL = "https://teachablemachine.withgoogle.com/models/IOBnV9dqB/";
+        const URL = "https://teachablemachine.withgoogle.com/models/Jaj-pyY7p/";
 
         // const urlMale = "https://teachablemachine.withgoogle.com/models/o9D1N5TN/";
         // const urlFemale = "https://teachablemachine.withgoogle.com/models/bB3YHn5r/";
@@ -175,7 +175,7 @@
             labelContainer = document.getElementById("label-container");
             for (let i = 0; i < maxPredictions; i++) {
                 var element = document.createElement("div")
-                element.classList.add("d-flex");
+                element.classList.add("d-flex"); 
                 labelContainer.appendChild(element);
             }
         }
@@ -296,12 +296,13 @@
                 //     default:
                 //         labelTitle = "알수없음"
                 // }
-                var label = "<div class='animal-label d-flex align-items-center'>" + prediction[i].className + "</div>"
-                var bar = "<div class='bar-container position-relative container'><div class='percent-box'></div><div class='d-flex justify-content-center align-items-center percent-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></div>"
+                var label = "<section class='animal-label d-flex align-items-center'>" + prediction[i].className + "</section>"
+                var bar = "<section class='bar-container position-relative container'><div class='percent-box'></div><div class='d-flex justify-content-center align-items-center percent-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></section>"
+                // var bar = "<section class='percent'><div class='percent-box'></div><div class='d-flex justify-content-center align-items-center percent-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></section>"
                 //    console.log('bar',bar);
                 // var bar = "<div class='bar-container position-relative container'><div class='" + prediction[i].className + "-box'></div><div class='d-flex justify-content-center align-items-center " + prediction[i].className + "-bar' style='width: " + barWidth + "'><span class='d-block percent-text'>" + Math.round(prediction[i].probability.toFixed(2) * 100) + "%</span></div></div>"
 
-                labelContainer.childNodes[i].innerHTML = label + bar;
+                labelContainer.childNodes[i].innerHTML = "<section class='result'>" + label + bar + "</section>";
             }
         }
     </script>
